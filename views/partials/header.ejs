@@ -9,18 +9,18 @@
 <body>
     <header>
         <div class="container-nav">
-            <div class="logo"><a href="/home"><img src="images/logo.png" alt="Ink wave"></a></div>
+            <div class="logo"><a href="/home"><img src="/images/logo.png" alt="Ink Wave"></a></div>
             <nav>
                 <ul class="nav-links">
                     <li><a href="/home">HOME</a></li>
                     <li><a href="/post">POST</a></li>
-                    <li><a href="/login">LOGIN</a></li>
+                    <% if (typeof user !== 'undefined' && user) { %>
+                        <li><a href="/write-post">WRITE</a></li>
+                        <li><a href="/logout">LOGOUT (<%= user %>)</a></li>
+                    <% } else { %>
+                        <li><a href="/login">LOGIN</a></li>
+                    <% } %>
                 </ul>
             </nav>
         </div>
-
     </header>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/js/main.js"></script>
-</body>
-</html>

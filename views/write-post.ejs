@@ -1,7 +1,6 @@
 <%- include("partials/header") %>
 
 <main class="post-main">
-  <!-- Title section (the one you said was missing) -->
   <section class="post-title-section">
     <div class="container">
       <h1 class="page-title">Write for Ink Wave</h1>
@@ -9,12 +8,14 @@
     </div>
   </section>
 
-  <!-- Writing section -->
   <section class="post-con">
-    <form id="writePostForm" class="post-writing-sec" method="POST" action="/compose" enctype="multipart/form-data">
-      <input id="postTitle" name="title" class="post-title-input" type="text" maxlength="100" placeholder="Enter a title (max 100 chars)" required>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <p style="color: #c0392b; margin-bottom: 16px; font-weight: 600;"><%= error %></p>
+    <% } %>
+    <form id="writePostForm" class="post-writing-sec" method="POST" action="/compose">
+      <input id="postTitle" name="title" class="post-title-input" type="text" maxlength="100" placeholder="Enter a title (max 100 chars)" value="<%= typeof values !== 'undefined' && values.title ? values.title : '' %>" required>
 
-      <textarea id="postBody" name="body" class="post-textarea" maxlength="500" placeholder="Write your post here (max 500 chars)" required></textarea>
+      <textarea id="postBody" name="body" class="post-textarea" maxlength="500" placeholder="Write your post here (max 500 chars)" required><%= typeof values !== 'undefined' && values.body ? values.body : '' %></textarea>
 
       <div class="meta-row">
         <div class="char-count"><span id="chars">0</span>/500</div>

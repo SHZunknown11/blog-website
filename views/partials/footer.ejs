@@ -1,35 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-     <div class="fot-main">
-        <div class="side1, fot-sec">
-            <div class="s1-con">
-                <h1 class="header">About Me</h1>
-                <img src="images/goth.jpg" alt="goth" class="circular-profile profile">
-                <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum consequuntur amet ex ut voluptatem magnam rem reprehenderit atque, repellendus aliquam suscipit aut dicta ullam, autem officiis repellat maxime, est dignissimos?
-                Laboriosam vero earum debitis quidem blanditiis reprehenderit molestias inventore! Distinctio maiores neque non aspernatur dolor animi eligendi eveniet voluptates velit quia vitae tempore perferendis earum nisi voluptatibus debitis, cum expedita.</p>
-                <p class="footer">© Copyright 2026 Ink Wave</p>
-            </div>
+<footer class="fot-main">
+    <div class="side1 fot-sec">
+        <div class="s1-con">
+            <h1 class="header">About Me</h1>
+            <img src="/images/goth.jpg" alt="about" class="circular-profile profile">
+            <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum consequuntur amet ex ut voluptatem magnam rem reprehenderit atque, repellendus aliquam suscipit aut dicta ullam, autem officiis repellat maxime, est dignissimos? Laboriosam vero earum debitis quidem blanditiis reprehenderit molestias inventore!</p>
+            <p class="copyright">&copy; Copyright 2026 Ink Wave</p>
         </div>
+    </div>
 
-        <div class="side2 fot-sec">
-            <div class="mail-sec">
-            <h2 class="mail-title">Join Mailing List</h2><br>
-            <form action="/subscribe">
-                <label for="name" class="mail-obj">Name:</label><br>
-                <input type="text" name="name" id="name" class="input-field" required><br>
-                <label for="email" class="mail-obj">Email:</label><br>
-                <input type="email" name="email" id="email" class="input-field" required><br>
+    <div class="side2 fot-sec">
+        <div class="mail-sec">
+            <h2 class="mail-title">Join Mailing List</h2>
+            <form action="/subscribe" method="POST">
+                <label for="name" class="mail-obj">Name:</label>
+                <input type="text" name="name" id="name" class="input-field" required>
+                <label for="email" class="mail-obj">Email:</label>
+                <input type="email" name="email" id="email" class="input-field" required>
                 <input type="submit" class="sub-btn" value="Subscribe Now">
-            </div>
-
             </form>
         </div>
-     </div>
+    </div>
+</footer>
+
+<script src="/js/main.js"></script>
 </body>
 </html>

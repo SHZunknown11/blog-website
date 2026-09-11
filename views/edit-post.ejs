@@ -3,6 +3,10 @@
 <main class="container edit-post-container">
   <h2>Edit Post</h2>
 
+  <% if (typeof error !== 'undefined' && error) { %>
+    <p style="color: #c0392b; margin-bottom: 16px; font-weight: 600;"><%= error %></p>
+  <% } %>
+
   <form action="/post/<%= post.id %>/update" method="POST" class="edit-form">
     <div class="form-row">
       <label>Title</label>
@@ -14,7 +18,7 @@
     </div>
 
     <div class="form-actions">
-      <button class="btn">Save</button>
+      <button type="submit" class="btn">Save</button>
       <a href="/post/<%= post.id %>" class="btn btn-link">Cancel</a>
     </div>
   </form>

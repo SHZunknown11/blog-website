@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/css/style.css" />
-  <title>Login | Ink Wave</title>
-</head>
-<body>
+<%- include('partials/header') %>
 
 <section class="auth-page">
   <div class="auth-card">
     <h2>Welcome back</h2>
     <p class="auth-sub">Log in to continue writing.</p>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <p style="color: #c0392b; margin-bottom: 16px; font-weight: 600;"><%= error %></p>
+    <% } %>
 
     <form action="/login" method="POST" class="auth-form">
       <input type="text" name="uid" placeholder="Email/Username" required />
@@ -22,5 +18,4 @@
   </div>
 </section>
 
-</body>
-</html>
+<%- include('partials/footer') %>
