@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<main class="container single-post-container">
+  <article class="single-post">
+    <header class="single-header">
+      <h1><%= post.title %></h1>
+      <div class="meta">By <strong><%= post.author %></strong> • <span><%= post.date %></span></div>
+    </header>
+
+    <section class="single-body">
+      <%= post.body %>
+    </section>
+
+    <footer class="post-actions">
+      <a href="/post/<%= post.id %>/edit" class="button btn btn-edit">Edit</a>
+
+      <form action="/post/<%= post.id %>/delete" method="POST" style="display:inline">
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+      </form>
+
+      <a href="/post" class="button btn btn-edit">Back to posts</a>
+    </footer>
+  </article>
+</main>
+
+<%- include('partials/footer.ejs') %>

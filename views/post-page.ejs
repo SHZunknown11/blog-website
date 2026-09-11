@@ -1,0 +1,7 @@
+<%- include('partials/header.ejs') %>
+<section class="post-area">
+  <% posts.forEach(post => { %>
+    <%- include("post", { post }) %>
+  <% }) %>
+</section>
+<%- include('partials/footer.ejs') %>

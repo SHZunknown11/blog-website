@@ -1,0 +1,30 @@
+<%- include("partials/header") %>
+
+<main class="post-main">
+  <!-- Title section (the one you said was missing) -->
+  <section class="post-title-section">
+    <div class="container">
+      <h1 class="page-title">Write for Ink Wave</h1>
+      <p class="lead">Share a thought, an idea, or something that helps someone today.</p>
+    </div>
+  </section>
+
+  <!-- Writing section -->
+  <section class="post-con">
+    <form id="writePostForm" class="post-writing-sec" method="POST" action="/compose" enctype="multipart/form-data">
+      <input id="postTitle" name="title" class="post-title-input" type="text" maxlength="100" placeholder="Enter a title (max 100 chars)" required>
+
+      <textarea id="postBody" name="body" class="post-textarea" maxlength="500" placeholder="Write your post here (max 500 chars)" required></textarea>
+
+      <div class="meta-row">
+        <div class="char-count"><span id="chars">0</span>/500</div>
+      </div>
+
+      <div class="post-actions">
+        <button type="submit" id="postBtn" class="btn btn-primary"> + POST</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<%- include("partials/footer") %>
