@@ -1,4 +1,4 @@
-# Section 26 Blog Website
+# Blog Website
 
 A simple Express and EJS blog website project.
 
