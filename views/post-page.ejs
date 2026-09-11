@@ -1,3 +1,11 @@
 <%- include('partials/header.ejs') %>
-<%- include('post-area.ejs') %>
+
+<div class="page-layout">
+    <%- include('partials/sidebar-left.ejs') %>
+    <main class="main-content">
+        <%- include('post-area.ejs') %>
+    </main>
+    <%- include('partials/sidebar-right.ejs') %>
+</div>
+
 <%- include('partials/footer.ejs') %>

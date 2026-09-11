@@ -1,33 +1,36 @@
 <%- include('partials/header.ejs') %>
-<div class="main">
-    <section class="poster">
-    </section>
-    <%- include('post-area.ejs') %>
-    <div class="btn-feature">
-        <a href="/post" class="button-p">View All Posts</a>
-        <!-- <a href="/write-post" class="button post-smth">Post Something</a> -->
-        <!-- From Uiverse.io by adamgiebl --> 
-        <a href="/write-post">
-        <button>
-  <div class="svg-wrapper-1 button">
-    <div class="svg-wrapper button">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-      >
-        <path fill="none" d="M0 0h24v24H0z"></path>
-        <path
-          fill="currentColor"
-          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-        ></path>
-      </svg>
-    </div>
-  </div>
-  <span>Post</span>
-</button>
-</a>
-    </div>
+<section class="poster"></section>
+
+<div class="page-layout">
+    <%- include('partials/sidebar-left.ejs') %>
+
+    <main class="main-content">
+        <%- include('post-area.ejs') %>
+        <div class="btn-feature">
+            <a href="/post" class="button-p">View All Posts</a>
+            <!-- From Uiverse.io by adamgiebl -->
+            <a href="/write-post" class="fly-btn">
+                <div class="svg-wrapper-1">
+                    <div class="svg-wrapper">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            height="24"
+                        >
+                            <path fill="none" d="M0 0h24v24H0z"></path>
+                            <path
+                                fill="currentColor"
+                                d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                            ></path>
+                        </svg>
+                    </div>
+                </div>
+                <span>Post</span>
+            </a>
+        </div>
+    </main>
+
+    <%- include('partials/sidebar-right.ejs') %>
 </div>
 <%- include('partials/footer.ejs') %>

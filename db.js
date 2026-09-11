@@ -21,6 +21,13 @@ db.exec(`
     email TEXT NOT NULL UNIQUE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
+
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
 `);
 
 const seedPosts = [
@@ -64,6 +71,8 @@ const stmt = {
   update: db.prepare("UPDATE posts SET title = ?, body = ?, date = ? WHERE id = ?"),
   remove: db.prepare("DELETE FROM posts WHERE id = ?"),
   addSub: db.prepare("INSERT OR IGNORE INTO subscribers (name, email) VALUES (?, ?)"),
+  userByUsername: db.prepare("SELECT * FROM users WHERE username = ?"),
+  insertUser: db.prepare("INSERT INTO users (username, password_hash) VALUES (?, ?)"),
 };
 
 export function getPosts(limit) {
@@ -90,6 +99,15 @@ export function deletePost(id) {
 
 export function addSubscriber(name, email) {
   stmt.addSub.run(name, email);
+}
+
+export function getUserByUsername(username) {
+  return stmt.userByUsername.get(username);
+}
+
+export function createUser({ username, passwordHash }) {
+  const info = stmt.insertUser.run(username, passwordHash);
+  return info.lastInsertRowid;
 }
 
 export default db;

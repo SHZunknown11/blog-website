@@ -12,11 +12,13 @@
     </section>
 
     <footer class="post-actions">
-      <a href="/post/<%= post.id %>/edit" class="btn btn-edit">Edit</a>
+      <% if (typeof user !== 'undefined' && user && (user.role === 'admin' || user.username === post.author)) { %>
+        <a href="/post/<%= post.id %>/edit" class="btn btn-edit">Edit</a>
 
-      <form action="/post/<%= post.id %>/delete" method="POST" style="display:inline">
-        <button class="btn btn-danger" type="submit" onclick="return confirm('Delete this post?')">Delete</button>
-      </form>
+        <form action="/post/<%= post.id %>/delete" method="POST" style="display:inline">
+          <button class="btn btn-danger" type="submit" onclick="return confirm('Delete this post?')">Delete</button>
+        </form>
+      <% } %>
 
       <a href="/post" class="btn btn-link">Back to posts</a>
     </footer>

@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<section class="auth-page">
+  <div class="auth-card">
+    <h2>Create an account</h2>
+    <p class="auth-sub">Sign up to start writing on Ink Wave.</p>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <p style="color: #c0392b; margin-bottom: 16px; font-weight: 600;"><%= error %></p>
+    <% } %>
+
+    <form action="/signup" method="POST" class="auth-form">
+      <input type="text" name="uid" placeholder="Choose a username" value="<%= typeof values !== 'undefined' && values.uid ? values.uid : '' %>" required />
+      <input type="password" name="password" placeholder="Password (min 4 characters)" required />
+      <input type="password" name="confirm" placeholder="Confirm password" required />
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -6,6 +6,9 @@
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 * {
@@ -16,39 +19,90 @@ body {
 
 .container-nav{
     width: 100%;
-    height: 100px;
     background-color: #7C726Dff;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 64px;
+    padding: 10px 32px;
+    gap: 24px;
+    position: relative;
 }
 
 
 .logo {
   display: flex;
   align-items: center;
-  height: 100%;
+  flex-shrink: 0;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
 }
 
 .logo img {
-  height: 90px;
-  width: auto;
+  /* The padded artwork occupies about 35% of the original image height. */
+  height: 100px;
+  width: 100px;
+  flex-shrink: 0;
   display: block;
-  margin-left: 20px;
+  transform: translateY(6px);
 }
+
+.container-nav nav {
+  min-width: 0;
+  margin-left: auto;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  padding: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #1a1310;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-toggle.open .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.nav-toggle.open .bar:nth-child(2) { opacity: 0; }
+.nav-toggle.open .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
 .nav-links{
     list-style: none;
     display: flex;
-    gap: 50px;
-    padding-right: 40px;
+    align-items: center;
+    gap: 28px;
     
 }
 
 .nav-links a{
     color: black;
     text-decoration: none;
-    font-size: 23px;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 18px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
     
 }
 
@@ -58,7 +112,8 @@ a:hover {
 
 
 .poster {
-  height: 100vh;
+  height: 60vh;
+  min-height: 320px;
   background-image: url("/images/poster1.jpg");
   background-size: cover;
   background-position: center;
@@ -71,7 +126,7 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 40px;
-  max-width: 1200px;
+  max-width: 1220px;
   margin: 80px auto 20px;
   padding: 0 40px;
 }
@@ -126,12 +181,11 @@ article .content{
 }
 
 article p{
-  margin-bottom: 50px;
+  margin-bottom: 24px;
 }
 
 .post-like {
   position: absolute;
-  padding-top: 50px;
   bottom: 16px;
   right: 16px;
   font-size: 24px;
@@ -147,26 +201,18 @@ article p{
     margin-bottom: 30px;
     
 }
-/* From Uiverse.io by adamgiebl */ 
+
+/* generic sane default so bare <button> elements everywhere
+   (Login, Save, Delete, +POST) get a normal, non-broken baseline */
 button {
   font-family: inherit;
-  font-size: 20px;
-  background: #281D17ff;
-  color: white;
-  padding: 0.7em 1em;
-  padding-left: 1.9em;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  border: none;
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.2s;
+  font-size: 16px;
   cursor: pointer;
-  width: 150px;
 }
 
-.button {
+/* From Uiverse.io by adamgiebl — scoped to .fly-btn only so it
+   doesn't leak into every other button on the site */
+.fly-btn {
   font-family: inherit;
   font-size: 20px;
   background: #281D17ff;
@@ -182,34 +228,34 @@ button {
   transition: all 0.2s;
   cursor: pointer;
   width: 150px;
+  text-decoration: none;
 }
 
-
-button span {
+.fly-btn span {
   display: block;
   margin-left: 0.3em;
   transition: all 0.3s ease-in-out;
 }
 
-button svg {
+.fly-btn svg {
   display: block;
   transform-origin: center center;
   transition: transform 0.3s ease-in-out;
 }
 
-button:hover .svg-wrapper {
+.fly-btn:hover .svg-wrapper {
   animation: fly-1 0.6s ease-in-out infinite alternate;
 }
 
-button:hover svg {
+.fly-btn:hover svg {
   transform: translateX(1.2em) rotate(45deg) scale(1.1);
 }
 
-button:hover span {
+.fly-btn:hover span {
   transform: translateX(5em);
 }
 
-button:active {
+.fly-btn:active {
   transform: scale(0.95);
 }
 
@@ -249,102 +295,110 @@ button:active {
 
 .fot-main{
     width: 100%;
-    height: 400px;
+    padding: 40px;
     background-color: black;
-    display: flex;
-  color: whitesmoke;
+    color: whitesmoke;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: auto;
 }
 
-.s1-con{
+/* 
+========================= SIDEBAR WIDGETS ======================== */
+
+.page-layout {
   display: grid;
-  grid-template-areas:
-    "header header"
-    "profile content"
-    "footer footer";
-  grid-template-columns: 1fr 3fr;
-  gap: 3px;
-  
+  grid-template-columns: 280px 1fr 280px;
+  gap: 32px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  align-items: start;
 }
 
-.fot-sec{
-  width: 50%;
-  height: 90%;
-  padding: 10px 20px;
-  
+.sidebar {
+  background: #e0e0e0;
+  border-radius: 12px;
+  padding: 24px;
+  position: sticky;
+  top: 20px;
 }
 
-.circular-profile {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  object-fit: cover; 
-  
-}
-.side2{
-  display: flex;
-justify-content: center;}
-
-.side2 .mail-sec{
-  width: fit-content;
-
+.main-content {
+  min-width: 0;
 }
 
-
-
-
-.side2 .mail-title{
-  margin-top: 15px;
-  font-size: 30px;
-}
-.side2 form input{
-  margin-bottom: 10px;
-  background-color: #919191;
-  border: none;
-  width: 250px;
-  color: white;
-  padding-left: 2px;
+.main-content .post-area {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  max-width: 1220px;
+  margin: 40px 0 20px;
+  padding: 0;
 }
 
-.side2 form .input-field{
-  height: 25px;
+.about-widget h3 {
+  font-size: 22px;
+  margin-bottom: 16px;
 }
 
-.side2 form .sub-btn{
-  background-color: #ffffff;
-  width: 250px;
-  padding: 8px;
-  font-weight: 540;
-  color: black;
+.about-widget .circular-profile {
+  display: block;
+  margin: 0 auto 16px;
 }
-.side2 label{
-  font-size: 20px;
+
+.about-widget p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.subscribe-widget h3 {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.subscribe-widget label {
+  display: block;
+  font-size: 15px;
   font-weight: bold;
   letter-spacing: 0.5px;
+  margin-bottom: 4px;
 }
 
-.s1-con .header {
-  grid-area: header;
-  /* padding: 20px 10px; */
-  font-size: 45px;
-  margin-bottom: 30px;
+.subscribe-widget input {
+  margin-bottom: 12px;
+  background-color: #ffffff;
+  border: 1px solid #A09187ff;
+  border-radius: 6px;
+  width: 100%;
+  color: #281D17;
+  padding: 8px 10px;
 }
 
+.subscribe-widget .sub-btn {
+  background-color: #281D17ff;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
-.s1-con .profile {
-  grid-area: profile;
-  margin-left: 20px;
-  
+.subscribe-widget .sub-btn:hover {
+  opacity: 0.9;
 }
-.s1-con .content {
-  grid-area: content;
-  font-size: 17px;  
-}
-.s1-con .copyright {
-  margin-left: 20px;
-  font-size: 15px;
-  font-weight: 450;
-  margin-top: 70px;
-  grid-area: footer;
+
+@media (max-width: 1000px) {
+  .page-layout {
+    grid-template-columns: 1fr;
+  }
+  .main-content { order: 1; }
+  .sidebar-left { order: 2; }
+  .sidebar-right { order: 3; }
+  .sidebar {
+    position: static;
+  }
 }
 
 /* ============ WRITE-POST================ */
@@ -532,9 +586,12 @@ background: linear-gradient(180deg, rgba(0,0,0,0.4), transparent), url('/images/
 }
 
 .auth-form button {
-  width: 80px;
+  width: fit-content;
+  min-width: 140px;
+  justify-content: center;
+  overflow: visible;
   margin-top: 10px;
-  padding: 14px 20px;
+  padding: 14px 24px;
   border: none;
   border-radius: 12px;
   background: #281D17ff;
@@ -547,20 +604,100 @@ background: linear-gradient(180deg, rgba(0,0,0,0.4), transparent), url('/images/
   opacity: 0.9;
 }
 
+.auth-switch {
+  margin-top: 20px;
+  text-align: center;
+  color: #7C726Dff;
+  font-size: 0.95rem;
+}
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
-  .container-nav { padding: 12px 16px; }
-  .logo img { height: 36px; }
+.auth-switch a {
+  color: #281D17ff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+
+/* ==================== RESPONSIVE ADJUSTMENTS ==================== */
+
+/* Tablet & mobile: switch to a hamburger-driven dropdown nav */
+@media (max-width: 800px) {
+  .container-nav {
+    min-height: 56px;
+    padding: 6px 16px;
+  }
+
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+    background: #7C726Dff;
+    max-height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    z-index: 30;
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+  }
+
+  .nav-links.open {
+    max-height: 400px;
+    visibility: visible;
+  }
+
+  .nav-links li {
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,0.15);
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 16px 24px;
+    font-size: 18px;
+  }
+
+  .btn-feature {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 20px;
+  }
+
+  .button-p,
+  .fly-btn {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 700px) {
-  .nav-links { display: none; } /* simple mobile: hide nav links */
-  .container-nav { align-items: center; gap: 8px; }
   .post-area { gap: 16px; }
   .post-card { padding: 20px; }
   .post-title-link { font-size: 1.1rem; }
   .single-post-container { padding: 16px; }
+
+  .single-post,
+  .edit-form {
+    padding: 24px;
+  }
+
+  .auth-card { padding: 24px; }
+
+  .single-post .post-actions,
+  .form-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .single-header h1 { font-size: 1.6rem; }
 }
 
 
